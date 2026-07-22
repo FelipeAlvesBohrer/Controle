@@ -380,8 +380,8 @@
       const mesFormatted = (mesSelecionado + 1).toString().padStart(2, '0');
       const nomeMes = nomesMeses[mesSelecionado];
 
-      document.getElementById('badgeDataSelecionada').innerText = ${diaFormatted}/${mesFormatted}/${anoSelecionado};
-      document.getElementById('displayDataExtenso').innerText = ${diaFormatted} DE ${nomeMes.toUpperCase()} DE ${anoSelecionado};
+      document.getElementById('badgeDataSelecionada').innerText = `${diaFormatted}/${mesFormatted}/${anoSelecionado}`;
+      document.getElementById('displayDataExtenso').innerText = `${diaFormatted} DE ${nomeMes.toUpperCase()} DE ${anoSelecionado}`;
     }
 
     // Atualiza nome na assinatura em tempo real
@@ -486,12 +486,12 @@
     function exportarCSV() {
       const diaFormatted = diaSelecionado.toString().padStart(2, '0');
       const mesFormatted = (mesSelecionado + 1).toString().padStart(2, '0');
-      const dataRef = ${diaFormatted}-${mesFormatted}-${anoSelecionado};
+      const dataRef = `${diaFormatted}-${mesFormatted}-${anoSelecionado}`;
       const profissional = document.getElementById('nomeProfissional').value || 'Caique Silva Holander';
 
-      let csv = S. M. A. Negri - Escritorio Previdenciario - Expediente de Atividades\n;
-      csv += Data: ${dataRef}; Responsavel: ${profissional}\n\n;
-      csv += Item;Referencia / Cliente;Descricao;Status\n;
+      let csv = `S. M. A. Negri - Escritorio Previdenciario - Expediente de Atividades\n`;
+      csv += `Data: ${dataRef}; Responsavel: ${profissional}\n\n`;
+      csv += `Item;Referencia / Cliente;Descricao;Status\n`;
 
       const linhas = document.querySelectorAll('#tabelaAtividades tr');
       linhas.forEach((tr, index) => {
@@ -501,14 +501,14 @@
         const desc = inputs[1].value.replace(/;/g, ',');
         const status = select.value;
 
-        csv += ${index + 1};${ref};${desc};${status}\n;
+        csv += `${index + 1};${ref};${desc};${status}\n`;
       });
 
       const blob = new Blob(["\ufeff" + csv], { type: 'text/csv;charset=utf-8;' });
       const link = document.createElement('a');
       const url = URL.createObjectURL(blob);
       link.setAttribute('href', url);
-      link.setAttribute('download', Expediente_SMANegri_${dataRef}.csv);
+      link.setAttribute('download', `Expediente_SMANegri_${dataRef}.csv`);
       document.body.appendChild(link);
       link.click();
       document.body.removeChild(link);
